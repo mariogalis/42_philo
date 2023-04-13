@@ -6,7 +6,7 @@
 /*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:02:45 by mario             #+#    #+#             */
-/*   Updated: 2023/03/21 17:03:15 by mario            ###   ########.fr       */
+/*   Updated: 2023/04/13 16:07:59 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,38 @@ void	get_args(int argc, char *argv[], t_args *args)
 		args->neats = ft_atoi(argv[5]);
 	else
 		args->neats = 0;
+}
+
+t_philo	*ft_lstnew(int i, t_args args)
+{
+	t_philo	*head;
+
+	head = malloc(sizeof(t_philo));
+	if (!head)
+		return (NULL);
+    head->args = args;
+    pthread_mutex_init(&head->mutexfork, NULL);
+    head->filoID= i;
+    head->state = THINKING;
+    head->repeats = args.neats;
+    head->totalrepeats = 0;
+	head->next = NULL;
+	return (head);
+}
+
+t_philo	*getlist(t_args args)
+{
+	t_philo	*philo;
+	int			i;
+
+	i = 1;
+	philo = ft_lstnew(i, args);
+	if (!philo)
+		return (NULL);
+	while (i < args.philos)
+	{
+		ft_lstadd_back(&philo, ft_lstnew(i, args));
+		i++;
+	}
+	return (philo);
 }

@@ -6,11 +6,33 @@
 /*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:57:47 by mario             #+#    #+#             */
-/*   Updated: 2023/03/21 16:37:02 by mario            ###   ########.fr       */
+/*   Updated: 2023/04/13 16:04:29 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+t_philo	*ft_lstlast(t_philo *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+void	ft_lstadd_back(t_philo **lst, t_philo *new)
+{
+	t_philo	*last;
+
+	if (!new)
+		return ;
+	last = ft_lstlast(*lst);
+	if (!last)
+		*lst = new;
+	else
+		last->next = new;
+}
 
 void	ft_error(char *err)
 {
@@ -51,4 +73,15 @@ int	ft_isdigit(int c)
 	if (c < '0' || c > '9')
 		return (0);
 	return (1);
+}
+
+void printargs(t_args *args)
+{
+	printf("\n*******************\n");
+	printf("Philo num   = %d\n", args->philos);
+	printf("Time to die = %d\n", args->tdie);
+	printf("Time to eat = %d\n", args->teat);
+	printf("Time to sle = %d\n", args->tsleep);
+	printf("Num of eats = %d\n", args->neats);
+	printf("********************\n");
 }
