@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:56:26 by mario             #+#    #+#             */
-/*   Updated: 2023/04/17 20:06:01 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/04/17 21:12:55 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_eat(t_philo *philos)
 
 void	*ft_takefork(void *arg)
 {
+	printf("HOLI");
 	t_philo *philos = (t_philo *) arg;
 	
 	pthread_mutex_lock(&philos->mutexfork[LEFT]);
@@ -47,6 +48,7 @@ void	*ft_takefork(void *arg)
 	pthread_mutex_lock(&philos->mutexfork[RIGHT]);
 	printf("Filósofo %d tiene ambos tenedores \n", philos->filoID);
 	ft_eat(philos);
+	
 	return (0);
 }
 

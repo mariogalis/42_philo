@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:40 by mario             #+#    #+#             */
-/*   Updated: 2023/04/17 20:29:59 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/04/17 21:09:36 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_args
 typedef struct s_philo
 {
 	t_args			args;
-	pthread_t		forks[200];
+	pthread_t		forks;
 	pthread_mutex_t	mutexfork[200];
 	int 			filoID;
 	int				repeats;

@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:30 by mario             #+#    #+#             */
-/*   Updated: 2023/04/17 20:30:17 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/04/17 21:10:39 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 // {
 // 	system("leaks philo");
 // }
-
 
 // void*	routine(t_args *args)
 // {
@@ -33,7 +32,7 @@ void ft_startroutine(t_philo	*philos)
 	aux = philos;
 	while(aux)
 	{
-		pthread_create(&aux->forks[i], NULL, &ft_takefork, (void *)philos);
+		pthread_create(&aux->forks, NULL, &ft_takefork, (void *)philos);
 		aux = aux->next;
 		i++;
 	}
@@ -57,7 +56,7 @@ int	main(int argc, char *argv[])
 	else
 		get_args(argc, argv, &args);
 	philos = getlist(args);
-	//printlst(philos);
+	printlst(philos);
 	ft_startroutine(philos);
 }
 
