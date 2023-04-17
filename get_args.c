@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:02:45 by mario             #+#    #+#             */
-/*   Updated: 2023/04/13 16:47:11 by mario            ###   ########.fr       */
+/*   Updated: 2023/04/17 20:10:51 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 
 void only_digits(char *argv[])
 {
-    int i = 1, j;
+	int i = 1, j;
 
-    while (argv[i] != NULL) {
-        j = 0;
-        while (argv[i][j] != '\0') {
-            if (!ft_isdigit(argv[i][j])) {
+	while (argv[i] != NULL) {
+		j = 0;
+		while (argv[i][j] != '\0') {
+			if (!ft_isdigit(argv[i][j])) {
 				ft_error("Only numbers");
-            }
-            j++;
-        }
-        i++;
-    }
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
 void	get_args(int argc, char *argv[], t_args *args)
@@ -49,13 +49,14 @@ t_philo	*ft_lstnew(int i, t_args args)
 	head = malloc(sizeof(t_philo));
 	if (!head)
 		return (NULL);
-    head->args = args;
-    pthread_mutex_init(&head->mutexfork[i], NULL);
-    head->filoID= i;
-    head->state = THINKING;
-    head->repeats = args.neats;
-    head->totalrepeats = 0;
+	head->args = args;
+	pthread_mutex_init(&head->mutexfork[i], NULL);
+	head->filoID= i;
+	head->state = THINKING;
+	head->repeats = args.neats;
+	head->totalrepeats = 0;
 	head->next = NULL;
+	head->startime = ft_timer(0);
 	return (head);
 }
 
@@ -68,7 +69,8 @@ t_philo	*getlist(t_args args)
 	philo = ft_lstnew(i, args);
 	if (!philo)
 		return (NULL);
-	while (i < args.philos)
+	i++;
+	while (i <= args.philos)
 	{
 		ft_lstadd_back(&philo, ft_lstnew(i, args));
 		i++;

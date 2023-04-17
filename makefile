@@ -1,4 +1,4 @@
-SRCS	=	main.c get_args.c utils.c actions.c
+SRCS	=	main.c get_args.c utils.c actions.c time.c
 
 OBJS	= ${SRCS:.c=.o}
 

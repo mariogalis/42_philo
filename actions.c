@@ -3,41 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:56:26 by mario             #+#    #+#             */
-/*   Updated: 2023/04/13 17:05:53 by mario            ###   ########.fr       */
+/*   Updated: 2023/04/17 20:06:01 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_eat(t_philo *philos)
+void	ft_think(t_philo *philos)
 {
-	sleep(philos->args.tdie);
-	pthread_mutex_unlock(&philos->mutexfork[LEFT]);
-    pthread_mutex_unlock(&philos->mutexfork[RIGHT]);
-	if(philos->repeats != 0 && philos->repeats != philos->totalrepeats)
-		philos->totalrepeats++;
-	
-}
 
-void	ft_takefork(t_philo *philos)
-{
-	pthread_mutex_lock(&philos->mutexfork[LEFT]);
-	printf("Filósofo %d tiene el tenedor izquierdo (%d)...\n", philos->filoID, LEFT);
-	pthread_mutex_lock(&philos->mutexfork[RIGHT]);
-    printf("Filósofo %d tiene ambos tenedores (%d, %d) y está comiendo...\n", philos->filoID, LEFT, RIGHT);
-	ft_eat(philos);
-}
-
-void	*ft_think(void *arg)
-{
-	t_philo *philos = (t_philo *) arg;
-
-	printf("%d is thinking", philos->filoID);
+	printf("%d is thinking...\n", philos->filoID);
 	sleep(philos->args.tsleep);
 	ft_takefork(philos);
-	return 0;
 }
+
+void	ft_sleep(t_philo *philos)
+{
+	printf("Filósofo %d esta sobando \n", philos->filoID);
+	sleep(philos->args.tsleep);
+	ft_think(philos);
+}
+
+void	ft_eat(t_philo *philos)
+{
+	printf("Filósofo %d esta zampando\n", philos->filoID);
+	sleep(philos->args.teat);
+	pthread_mutex_unlock(&philos->mutexfork[LEFT]);
+	pthread_mutex_unlock(&philos->mutexfork[RIGHT]);
+	// if(philos->repeats != 0 && philos->repeats != philos->totalrepeats)
+	// 	philos->totalrepeats++;
+	ft_sleep(philos);
+}
+
+void	*ft_takefork(void *arg)
+{
+	t_philo *philos = (t_philo *) arg;
+	
+	pthread_mutex_lock(&philos->mutexfork[LEFT]);
+	printf("Filósofo %d tiene el tenedor izquierdo \n", philos->filoID);
+	pthread_mutex_lock(&philos->mutexfork[RIGHT]);
+	printf("Filósofo %d tiene ambos tenedores \n", philos->filoID);
+	ft_eat(philos);
+	return (0);
+}
+
 
