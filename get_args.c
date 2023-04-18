@@ -6,23 +6,25 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:02:45 by mario             #+#    #+#             */
-/*   Updated: 2023/04/17 20:10:51 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/04/18 18:31:51 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-void only_digits(char *argv[])
+void	only_digits(char *argv[])
 {
-	int i = 1, j;
+	int	i;
+	int	j;
 
-	while (argv[i] != NULL) {
+	i = 1;
+	while (argv[i] != NULL)
+	{
 		j = 0;
-		while (argv[i][j] != '\0') {
-			if (!ft_isdigit(argv[i][j])) {
+		while (argv[i][j] != '\0')
+		{
+			if (!ft_isdigit(argv[i][j]))
 				ft_error("Only numbers");
-			}
 			j++;
 		}
 		i++;
@@ -36,7 +38,7 @@ void	get_args(int argc, char *argv[], t_args *args)
 	args->tdie = ft_atoi(argv[2]);
 	args->teat = ft_atoi(argv[3]);
 	args->tsleep = ft_atoi(argv[4]);
-	if(argc == 6)
+	if (argc == 6)
 		args->neats = ft_atoi(argv[5]);
 	else
 		args->neats = 0;
@@ -50,20 +52,24 @@ t_philo	*ft_lstnew(int i, t_args args)
 	if (!head)
 		return (NULL);
 	head->args = args;
-	pthread_mutex_init(&head->mutexfork[i], NULL);
-	head->filoID= i;
+	head->filoid = i;
 	head->state = THINKING;
 	head->repeats = args.neats;
 	head->totalrepeats = 0;
 	head->next = NULL;
 	head->startime = ft_timer(0);
+	head->right = i;
+	if (i == 1)
+		head->left = args.philos;
+	else
+		head->left = (i + args.philos - 1) % args.philos;
 	return (head);
 }
 
 t_philo	*getlist(t_args args)
 {
 	t_philo	*philo;
-	int			i;
+	int		i;
 
 	i = 1;
 	philo = ft_lstnew(i, args);
