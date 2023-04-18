@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:57:47 by mario             #+#    #+#             */
-/*   Updated: 2023/04/17 18:26:24 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/04/18 16:07:42 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,32 +40,19 @@ void	ft_error(char *err)
 	exit(1);
 }
 
-int	ft_atoi(const char *str)
+unsigned long int	ft_atoi(char const *str)
 {
 	unsigned long long int	ans;
-	int						sign;
 
 	ans = 0;
-	sign = 1;
 	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == 45)
-	{
-		sign *= -1;
-		str++;
-	}
-	else if (*str == 43)
 		str++;
 	while (*str > 47 && *str < 58)
 	{
 		ans = ans * 10 + (*str - 48);
 		str++;
 	}
-	if (ans > 9223372036854775807 && sign < 0)
-		return (0);
-	else if (ans > 9223372036854775807 && sign > 0)
-		return (-1);
-	return ((int)(ans * sign));
+	return ((unsigned long int)ans);
 }
 
 int	ft_isdigit(int c)
@@ -79,9 +66,9 @@ void printargs(t_args *args)
 {
 	printf("\n*******************\n");
 	printf("Philo num   = %d\n", args->philos);
-	printf("Time to die = %d\n", args->tdie);
-	printf("Time to eat = %d\n", args->teat);
-	printf("Time to sle = %d\n", args->tsleep);
+	printf("Time to die = %lu\n", args->tdie);
+	printf("Time to eat = %lu\n", args->teat);
+	printf("Time to sle = %lu\n", args->tsleep);
 	printf("Num of eats = %d\n", args->neats);
 	printf("********************\n");
 }
