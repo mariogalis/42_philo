@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:40 by mario             #+#    #+#             */
-/*   Updated: 2023/04/19 18:06:08 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:56:57 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int					ft_isdigit(int c);
 void				ft_lstadd_back(t_philo **lst, t_philo *new);
 void				ft_error(char *str);
 void				get_args(int argc, char *argv[], t_args *args);
-void				*ft_takefork(void *arg);
+void				ft_takefork(t_philo *philos);
 void				ft_eat(t_philo *philos);
 void				ft_think(t_philo *philos);
 unsigned long int	ft_timer(unsigned long int time_start);
@@ -75,4 +75,5 @@ t_philo				*ft_lstlast(t_philo *lst);
 void				printargs(t_args *args);
 void				printlst(t_philo	*philos);
 int					print_mutex(t_philo *philos, char *str, char *color);
+void				*routine(void *arg);
 #endif

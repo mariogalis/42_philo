@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:30 by mario             #+#    #+#             */
-/*   Updated: 2023/04/19 18:39:39 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:56:28 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_startroutine(t_philo *philos)
 	aux = philos;
 	while (aux)
 	{
-		pthread_create(&aux->thread, NULL, &ft_takefork, (void *)aux);
+		pthread_create(&aux->thread, NULL, &routine, (void *)aux);
 		aux = aux->next;
 	}
 	aux = philos;
