@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:40 by mario             #+#    #+#             */
-/*   Updated: 2023/04/18 19:40:07 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:06:08 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_args
 typedef struct s_philo
 {
 	t_args			args;
-	pthread_t		forks;
+	pthread_t		thread;
 	int				filoid;
 	int				repeats;
 	int				totalrepeats;
@@ -51,12 +51,12 @@ typedef struct s_philo
 	int				state;
 	int				left;
 	int				right;
-	struct s_philo			*next;
+	struct s_philo	*next;
+	struct s_all	*all;
 }t_philo;
 
 typedef struct s_all
 {
-	t_philo			*philos;
 	pthread_mutex_t	mutexfork[202];
 	pthread_mutex_t	mutex_print;
 }t_all;
@@ -67,12 +67,12 @@ void				ft_lstadd_back(t_philo **lst, t_philo *new);
 void				ft_error(char *str);
 void				get_args(int argc, char *argv[], t_args *args);
 void				*ft_takefork(void *arg);
-void				ft_eat(t_all *all);
-void				ft_think(t_all *all);
+void				ft_eat(t_philo *philos);
+void				ft_think(t_philo *philos);
 unsigned long int	ft_timer(unsigned long int time_start);
 t_philo				*getlist(t_args args);
 t_philo				*ft_lstlast(t_philo *lst);
 void				printargs(t_args *args);
 void				printlst(t_philo	*philos);
-int	print_mutex(t_all *all, char *str, char *color);
+int					print_mutex(t_philo *philos, char *str, char *color);
 #endif

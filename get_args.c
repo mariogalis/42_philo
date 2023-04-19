@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:02:45 by mario             #+#    #+#             */
-/*   Updated: 2023/04/18 18:31:51 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:31:52 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	get_args(int argc, char *argv[], t_args *args)
 		args->neats = 0;
 }
 
-t_philo	*ft_lstnew(int i, t_args args)
+t_philo	*ft_lstnew(int i, t_args args, t_all *all)
 {
 	t_philo	*head;
 
@@ -59,6 +59,7 @@ t_philo	*ft_lstnew(int i, t_args args)
 	head->next = NULL;
 	head->startime = ft_timer(0);
 	head->right = i;
+	head->all = all;
 	if (i == 1)
 		head->left = args.philos;
 	else
@@ -69,16 +70,25 @@ t_philo	*ft_lstnew(int i, t_args args)
 t_philo	*getlist(t_args args)
 {
 	t_philo	*philo;
+	t_all	*all;
 	int		i;
 
+	all = malloc(sizeof(t_all));
 	i = 1;
-	philo = ft_lstnew(i, args);
+	pthread_mutex_init(&all->mutex_print, NULL);
+	while (i <= args.philos)
+	{
+		pthread_mutex_init(&all->mutexfork[i], NULL);
+		i++;
+	}
+	i = 1;
+	philo = ft_lstnew(i, args, all);
 	if (!philo)
 		return (NULL);
 	i++;
 	while (i <= args.philos)
 	{
-		ft_lstadd_back(&philo, ft_lstnew(i, args));
+		ft_lstadd_back(&philo, ft_lstnew(i, args, all));
 		i++;
 	}
 	return (philo);
