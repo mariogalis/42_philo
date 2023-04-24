@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:30 by mario             #+#    #+#             */
-/*   Updated: 2023/04/19 18:56:28 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/04/24 20:30:20 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_startroutine(t_philo *philos)
 
 	i = 0;
 	aux = philos;
+	philos->startime = timestamp();
 	while (aux)
 	{
 		pthread_create(&aux->thread, NULL, &routine, (void *)aux);

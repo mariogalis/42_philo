@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:40 by mario             #+#    #+#             */
-/*   Updated: 2023/04/19 18:56:57 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/04/24 20:31:48 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_philo
 
 typedef struct s_all
 {
+	int				alleat;
+	long long		startime;
 	pthread_mutex_t	mutexfork[202];
 	pthread_mutex_t	mutex_print;
 }t_all;
@@ -76,4 +78,7 @@ void				printargs(t_args *args);
 void				printlst(t_philo	*philos);
 int					print_mutex(t_philo *philos, char *str, char *color);
 void				*routine(void *arg);
+unsigned long int	c_time(unsigned long int time_start);
+unsigned long int	ft_timer(unsigned long int time_start);
+long long			timestamp(void);
 #endif
