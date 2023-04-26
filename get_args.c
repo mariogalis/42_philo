@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:02:45 by mario             #+#    #+#             */
-/*   Updated: 2023/04/25 19:12:14 by mario            ###   ########.fr       */
+/*   Updated: 2023/04/26 19:27:51 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,14 @@ t_philo	*ft_lstnew(int i, t_args args, t_all *all)
 		return (NULL);
 	head->args = args;
 	head->filoid = i;
-	head->state = THINKING;
+	head->state = -1;
 	head->repeats = args.neats;
 	head->totalrepeats = 0;
 	head->next = NULL;
 	head->startime = ft_timer(0);
 	head->right = i;
 	head->all = all;
+	head->lasteat = 0;
 	if (i == 1)
 		head->left = args.philos;
 	else
@@ -76,6 +77,7 @@ t_philo	*getlist(t_args args)
 	all = malloc(sizeof(t_all));
 	i = 1;
 	pthread_mutex_init(&all->mutex_print, NULL);
+	pthread_mutex_init(&all->mutex_dead, NULL);
 	while (i <= args.philos)
 	{
 		pthread_mutex_init(&all->mutexfork[i], NULL);

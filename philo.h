@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:40 by mario             #+#    #+#             */
-/*   Updated: 2023/04/25 19:12:45 by mario            ###   ########.fr       */
+/*   Updated: 2023/04/26 20:04:48 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_philo
 	int				repeats;
 	int				totalrepeats;
 	unsigned long	startime;
+	unsigned long	lasteat;
 	int				state;
 	int				left;
 	int				right;
@@ -60,6 +61,7 @@ typedef struct s_all
 	long long		startime;
 	pthread_mutex_t	mutexfork[202];
 	pthread_mutex_t	mutex_print;
+	pthread_mutex_t	mutex_dead;
 }t_all;
 
 unsigned long int	ft_atoi(const char *str);
@@ -79,5 +81,7 @@ int					print_mutex(t_philo *philos, char *str, char *color);
 void				*routine(void *arg);
 unsigned long int	c_time(unsigned long int time_start);
 unsigned long int	ft_timer(unsigned long int time_start);
-long long			timestamp(void);
+unsigned long		timestamp(void);
+int					check_dead(t_philo *philo);
+int					ft_usleep(t_philo *philos, unsigned long int time);
 #endif
