@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:30 by mario             #+#    #+#             */
-/*   Updated: 2023/04/24 20:30:20 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/04/25 17:53:33 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ int	main(int argc, char *argv[])
 {
 	t_args	args;
 	t_philo	*philos;
-	int		i;
 
-	i = 1;
 	memset(&args, 0, sizeof(t_args));
 	if (argc < 5 || argc > 6)
 		ft_error("Number of arguments not valid");

@@ -1,0 +1,2 @@
+Tiempo de espera en mac 42 usleep(100)
+Tiempo de espera en el mio usleep(500)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:40 by mario             #+#    #+#             */
-/*   Updated: 2023/04/24 20:31:48 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/04/25 19:12:45 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ typedef struct s_philo
 
 typedef struct s_all
 {
-	int				alleat;
 	long long		startime;
 	pthread_mutex_t	mutexfork[202];
 	pthread_mutex_t	mutex_print;
@@ -69,7 +68,7 @@ void				ft_lstadd_back(t_philo **lst, t_philo *new);
 void				ft_error(char *str);
 void				get_args(int argc, char *argv[], t_args *args);
 void				ft_takefork(t_philo *philos);
-void				ft_eat(t_philo *philos);
+int					ft_eat(t_philo *philos);
 void				ft_think(t_philo *philos);
 unsigned long int	ft_timer(unsigned long int time_start);
 t_philo				*getlist(t_args args);
