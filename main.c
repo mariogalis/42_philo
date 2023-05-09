@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:30 by mario             #+#    #+#             */
-/*   Updated: 2023/05/03 18:44:06 by mario            ###   ########.fr       */
+/*   Updated: 2023/05/09 19:23:44 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static int	death_checker(t_philo *philos)
 		pthread_mutex_lock(&philos->all->mutex_dead);
 		if ((ft_timer(philos->all->startime) - philos->lasteat) > philos->args.tdie)
 		{
+			printf("PHILO %d RESTA %lu - %lu   > %lu\n",philos->filoid,ft_timer(philos->all->startime), philos->lasteat, philos->args.tdie);
 			philos->state = philos->filoid;
 			pthread_mutex_unlock(&philos->all->mutex_dead);
 			pthread_mutex_lock(&philos->all->mutex_print);
@@ -73,7 +74,7 @@ void	ft_startroutine(t_philo *philos)
 		if (all_ate(philos) == 1)
 		{
 			print_mutex(philos, "all ate\t\t"emoallate, RED );
-			exit (0);
+			break ;
 		}
 	}
 	aux = philos;

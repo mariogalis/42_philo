@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:02:45 by mario             #+#    #+#             */
-/*   Updated: 2023/05/03 17:54:04 by mario            ###   ########.fr       */
+/*   Updated: 2023/05/09 19:27:35 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ t_philo	*getlist(t_args args)
 	philo = ft_lstnew(i, args, all);
 	if (!philo)
 		return (NULL);
-	i++;
-	while (i <= args.philos)
+	while (i < args.philos)
 	{
 		ft_lstadd_back(&philo, ft_lstnew(i, args, all));
 		i++;
