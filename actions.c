@@ -3,37 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:56:26 by mario             #+#    #+#             */
-/*   Updated: 2023/04/26 20:04:58 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:40:30 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#define emoeat "🍔"
+#define emofork "🍴"
+#define emosleep "😴"
+#define emothink "🤔"
 
 void	ft_think(t_philo *philos)
 {
-	print_mutex(philos, "is thinking", YELLOW);
+	print_mutex(philos, "is thinking\t"emothink, YELLOW);
 	ft_usleep(philos, philos->args.tsleep);
 }
 
 void	ft_sleep(t_philo *philos)
 {
-	print_mutex(philos, "is sleeping", BLUE);
+	print_mutex(philos, "is sleeping\t"emosleep, BLUE);
 	ft_usleep(philos, philos->args.tsleep);
 }
 
 int	ft_eat(t_philo *philos)
 {
-	// if(philos->repeats == philos->totalrepeats)
-	// {
-	// 	pthread_mutex_unlock(&philos->all->mutexfork[philos->left]);
-	// 	pthread_mutex_unlock(&philos->all->mutexfork[philos->right]);
-	// 	return (1);
-	// }
 	philos->lasteat = ft_timer(philos->all->startime);
-	print_mutex(philos, "is eating", GREEN);
+	print_mutex(philos, "is eating\t\t"emoeat, GREEN);
+	philos->nate++;
 	ft_usleep(philos, philos->args.teat);
 	pthread_mutex_unlock(&philos->all->mutexfork[philos->left]);
 	pthread_mutex_unlock(&philos->all->mutexfork[philos->right]);
@@ -43,17 +42,11 @@ int	ft_eat(t_philo *philos)
 void	*routine(void *arg)
 {
 	t_philo *philos;
-	//int eats = 0;
 	philos = (t_philo *) arg;
 	if (philos->filoid % 2 != 0)
 		ft_usleep(philos, 100);
 	while(1)
 	{
-		// if(eats == philos->args.philos)
-		// {
-		// 	print_mutex(0,"everyone ate", RED);
-		// 	exit(0);
-		// }
 		ft_takefork(philos);
 		ft_eat(philos);
 		ft_sleep(philos);
@@ -65,7 +58,7 @@ void	*routine(void *arg)
 void	ft_takefork(t_philo *philos)
 {
 	pthread_mutex_lock(&philos->all->mutexfork[philos->left]);
-	print_mutex(philos, "has taken a fork", RESET);
+	print_mutex(philos, "has taken a fork\t"emofork, RESET);
 	pthread_mutex_lock(&philos->all->mutexfork[philos->right]);
-	print_mutex(philos, "has taken a fork", RESET);
+	print_mutex(philos, "has taken a fork\t"emofork, RESET);
 }

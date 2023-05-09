@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:40 by mario             #+#    #+#             */
-/*   Updated: 2023/04/26 20:04:48 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:53:21 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	int				filoid;
 	int				repeats;
-	int				totalrepeats;
+	int				nate;
 	unsigned long	startime;
 	unsigned long	lasteat;
 	int				state;

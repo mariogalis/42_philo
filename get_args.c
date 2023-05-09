@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:02:45 by mario             #+#    #+#             */
-/*   Updated: 2023/04/26 19:27:51 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:54:04 by mario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	get_args(int argc, char *argv[], t_args *args)
 	if (argc == 6)
 		args->neats = ft_atoi(argv[5]);
 	else
-		args->neats = 0;
+		args->neats = -1;
 }
 
 t_philo	*ft_lstnew(int i, t_args args, t_all *all)
@@ -55,7 +55,7 @@ t_philo	*ft_lstnew(int i, t_args args, t_all *all)
 	head->filoid = i;
 	head->state = -1;
 	head->repeats = args.neats;
-	head->totalrepeats = 0;
+	head->nate = 0;
 	head->next = NULL;
 	head->startime = ft_timer(0);
 	head->right = i;
