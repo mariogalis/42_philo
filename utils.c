@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:57:47 by mario             #+#    #+#             */
-/*   Updated: 2023/04/18 16:07:42 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:35:48 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,4 @@ int	ft_isdigit(int c)
 	if (c < '0' || c > '9')
 		return (0);
 	return (1);
-}
-
-void printargs(t_args *args)
-{
-	printf("\n*******************\n");
-	printf("Philo num   = %d\n", args->philos);
-	printf("Time to die = %lu\n", args->tdie);
-	printf("Time to eat = %lu\n", args->teat);
-	printf("Time to sle = %lu\n", args->tsleep);
-	printf("Num of eats = %d\n", args->neats);
-	printf("********************\n");
 }

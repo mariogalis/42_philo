@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:16:22 by magonzal          #+#    #+#             */
-/*   Updated: 2023/04/26 20:13:03 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:35:34 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	print_mutex(t_philo *philos, char *str, char *color)
 		pthread_mutex_unlock(&philos->all->mutex_print);
 		return (1);
 	}
-	printf("%s%lu %d %s\n"RESET, color, ft_timer(philos->startime), philos->filoid, str);
+	printf("%s[%lu] philo %d %s\n"RESET, color,
+		ft_timer(philos->startime), philos->filoid, str);
 	pthread_mutex_unlock(&philos->all->mutex_print);
 	return (0);
 }
@@ -57,4 +58,14 @@ int	check_dead(t_philo *philos)
 	}
 	pthread_mutex_unlock(&philos->all->mutex_dead);
 	return (0);
+}
+
+unsigned long int	ft_timer(unsigned long int time_start)
+{
+	struct timeval		time;
+	unsigned long int	ms;
+
+	gettimeofday(&time, NULL);
+	ms = (time.tv_sec * 1000) + (time.tv_usec / 1000) - time_start;
+	return (ms);
 }

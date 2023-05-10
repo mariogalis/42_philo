@@ -1,4 +1,4 @@
-SRCS	=	main.c get_args.c utils.c actions.c time.c utils2.c
+SRCS	=	main.c get_args.c utils.c actions.c utils2.c
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -8,7 +8,7 @@ CC	= gcc
 
 RM	= rm -f
 
-CFLAGS	= -Wall -Wextra -Werror -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror #-fsanitize=thread
 
 .c.o:
 		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}

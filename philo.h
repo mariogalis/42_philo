@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mario <mario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:40 by mario             #+#    #+#             */
-/*   Updated: 2023/05/03 17:53:21 by mario            ###   ########.fr       */
+/*   Updated: 2023/05/10 18:33:03 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # define GREEN "\x1b[32m"
 # define RED "\x1b[31m"
 
-
 typedef struct s_args
 {
 	int					philos;
@@ -42,18 +41,18 @@ typedef struct s_args
 
 typedef struct s_philo
 {
-	t_args			args;
-	pthread_t		thread;
-	int				filoid;
-	int				repeats;
-	int				nate;
-	unsigned long	startime;
-	unsigned long	lasteat;
-	int				state;
-	int				left;
-	int				right;
-	struct s_philo	*next;
-	struct s_all	*all;
+	t_args				args;
+	pthread_t			thread;
+	int					filoid;
+	int					repeats;
+	int					nate;
+	unsigned long int	startime;
+	unsigned long int	lasteat;
+	int					state;
+	int					left;
+	int					right;
+	struct s_philo		*next;
+	struct s_all		*all;
 }t_philo;
 
 typedef struct s_all

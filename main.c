@@ -6,27 +6,27 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:30 by mario             #+#    #+#             */
-/*   Updated: 2023/05/09 19:23:44 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:40:30 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#define emodie "💀"
-#define emoallate "🍻"
+#define EMODIE "💀"
+#define EMOALLATE "🍻"
 
 static int	death_checker(t_philo *philos)
 {
 	while (philos)
 	{
 		pthread_mutex_lock(&philos->all->mutex_dead);
-		if ((ft_timer(philos->all->startime) - philos->lasteat) > philos->args.tdie)
+		if ((ft_timer(philos->all->startime) - philos->lasteat)
+			> philos->args.tdie)
 		{
-			printf("PHILO %d RESTA %lu - %lu   > %lu\n",philos->filoid,ft_timer(philos->all->startime), philos->lasteat, philos->args.tdie);
 			philos->state = philos->filoid;
 			pthread_mutex_unlock(&philos->all->mutex_dead);
 			pthread_mutex_lock(&philos->all->mutex_print);
-			printf(RED"[%lu ms] philo %d has died\n"emodie,
-				ft_timer(philos->all->startime), philos->filoid + 1);
+			printf(RED"[%lu ms] philo %d has died\n"EMODIE,
+				ft_timer(philos->all->startime), philos->filoid);
 			exit(0);
 		}
 		pthread_mutex_unlock(&philos->all->mutex_dead);
@@ -35,30 +35,47 @@ static int	death_checker(t_philo *philos)
 	return (0);
 }
 
-int all_ate(t_philo *philos)
+int	all_ate(t_philo *philos)
 {
-	int ate = 0;
-	t_philo *aux = philos;
-	if(philos->args.neats == -1)
-		return 0;
-	while(aux)
+	int		ate;
+	t_philo	*aux;
+
+	aux = philos;
+	ate = 0;
+	if (philos->args.neats == -1)
+		return (0);
+	while (aux)
 	{
-		if(aux->nate >= aux->args.neats)
+		if (aux->nate >= aux->args.neats)
 			ate++;
 		aux = aux->next;
 	}
-	if(ate == philos->args.philos)
-		return 1;
-	return 0;
-	
-} 
+	if (ate == philos->args.philos)
+		return (1);
+	return (0);
+}
+
+int	auxstartroutine(t_philo *philos, t_philo *aux)
+{
+	ft_usleep(philos, 1);
+	if (death_checker(aux) == 1)
+		return (1);
+	if (all_ate(philos) == 1)
+	{
+		print_mutex(philos, "all ate\t\t"EMOALLATE, RED);
+		return (1);
+	}
+	return (0);
+}
 
 void	ft_startroutine(t_philo *philos)
 {
 	int		i;
+	int		flag;
 	t_philo	*aux;
 
 	i = 0;
+	flag = 0;
 	aux = philos;
 	while (aux)
 	{
@@ -66,17 +83,8 @@ void	ft_startroutine(t_philo *philos)
 		aux = aux->next;
 	}
 	aux = philos;
-	while (1)
-	{
-		ft_usleep(philos, 1);
-		if (death_checker(aux) == 1)
-			break ;
-		if (all_ate(philos) == 1)
-		{
-			print_mutex(philos, "all ate\t\t"emoallate, RED );
-			break ;
-		}
-	}
+	while (flag != 0)
+		flag = auxstartroutine(philos, aux);
 	aux = philos;
 	while (aux)
 	{
@@ -97,7 +105,7 @@ int	main(int argc, char *argv[])
 	else
 		get_args(argc, argv, &args);
 	philos = getlist(args);
-	philos->all->startime = timestamp();
+	philos->all->startime = ft_timer(0);
 	ft_startroutine(philos);
 	return (0);
 }

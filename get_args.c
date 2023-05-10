@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:02:45 by mario             #+#    #+#             */
-/*   Updated: 2023/05/09 19:27:35 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:59:07 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ t_philo	*getlist(t_args args)
 	philo = ft_lstnew(i, args, all);
 	if (!philo)
 		return (NULL);
-	while (i < args.philos)
+	i++;
+	while (i <= args.philos)
 	{
 		ft_lstadd_back(&philo, ft_lstnew(i, args, all));
 		i++;
