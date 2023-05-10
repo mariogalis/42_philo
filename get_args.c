@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:02:45 by mario             #+#    #+#             */
-/*   Updated: 2023/05/10 17:59:07 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/05/10 20:47:28 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,23 @@ void	only_digits(char *argv[])
 {
 	int	i;
 	int	j;
+	int	only_0;
 
 	i = 1;
 	while (argv[i] != NULL)
 	{
 		j = 0;
+		only_0 = 0;
 		while (argv[i][j] != '\0')
 		{
+			if (argv[i][j] != '0')
+				only_0 = 1;
 			if (!ft_isdigit(argv[i][j]))
 				ft_error("Only numbers");
 			j++;
 		}
+		if (only_0 == 0)
+			ft_error("Not a valid number");
 		i++;
 	}
 }
@@ -53,7 +59,6 @@ t_philo	*ft_lstnew(int i, t_args args, t_all *all)
 		return (NULL);
 	head->args = args;
 	head->filoid = i;
-	head->state = -1;
 	head->repeats = args.neats;
 	head->nate = 0;
 	head->next = NULL;
@@ -75,6 +80,7 @@ t_philo	*getlist(t_args args)
 	int		i;
 
 	all = malloc(sizeof(t_all));
+	all->state = -1;
 	i = 1;
 	pthread_mutex_init(&all->mutex_print, NULL);
 	pthread_mutex_init(&all->mutex_dead, NULL);
@@ -94,4 +100,19 @@ t_philo	*getlist(t_args args)
 		i++;
 	}
 	return (philo);
+}
+
+void	*routine(void *arg)
+{
+	t_philo	*philos;
+
+	philos = (t_philo *) arg;
+	pthread_mutex_lock(&philos->all->mutex_dead);
+	philos->lasteat = ft_timer(philos->all->startime);
+	pthread_mutex_unlock(&philos->all->mutex_dead);
+	if (philos->filoid % 2 != 0)
+		ft_usleep(philos, 20);
+	routineaux(philos);
+	pthread_mutex_unlock(&philos->all->mutex_dead);
+	return (0);
 }

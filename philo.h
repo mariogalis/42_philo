@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:40 by mario             #+#    #+#             */
-/*   Updated: 2023/05/10 18:33:03 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/05/10 20:46:46 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_philo
 	int					nate;
 	unsigned long int	startime;
 	unsigned long int	lasteat;
-	int					state;
 	int					left;
 	int					right;
 	struct s_philo		*next;
@@ -58,7 +57,8 @@ typedef struct s_philo
 typedef struct s_all
 {
 	long long		startime;
-	pthread_mutex_t	mutexfork[202];
+	int				state;
+	pthread_mutex_t	mutexfork[201];
 	pthread_mutex_t	mutex_print;
 	pthread_mutex_t	mutex_dead;
 }t_all;
@@ -68,9 +68,6 @@ int					ft_isdigit(int c);
 void				ft_lstadd_back(t_philo **lst, t_philo *new);
 void				ft_error(char *str);
 void				get_args(int argc, char *argv[], t_args *args);
-void				ft_takefork(t_philo *philos);
-int					ft_eat(t_philo *philos);
-void				ft_think(t_philo *philos);
 unsigned long int	ft_timer(unsigned long int time_start);
 t_philo				*getlist(t_args args);
 t_philo				*ft_lstlast(t_philo *lst);
@@ -83,4 +80,5 @@ unsigned long int	ft_timer(unsigned long int time_start);
 unsigned long		timestamp(void);
 int					check_dead(t_philo *philo);
 int					ft_usleep(t_philo *philos, unsigned long int time);
+void				routineaux(t_philo *philos);
 #endif

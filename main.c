@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:40:30 by mario             #+#    #+#             */
-/*   Updated: 2023/05/10 18:40:30 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/05/10 20:32:41 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ static int	death_checker(t_philo *philos)
 		if ((ft_timer(philos->all->startime) - philos->lasteat)
 			> philos->args.tdie)
 		{
-			philos->state = philos->filoid;
+			philos->all->state = philos->filoid;
 			pthread_mutex_unlock(&philos->all->mutex_dead);
 			pthread_mutex_lock(&philos->all->mutex_print);
-			printf(RED"[%lu ms] philo %d has died\n"EMODIE,
+			printf(RED"[%lu ms] philo %d has died\t"EMODIE,
 				ft_timer(philos->all->startime), philos->filoid);
-			exit(0);
+			printf("\n");
+			pthread_mutex_unlock(&philos->all->mutex_print);
+			return (1);
 		}
 		pthread_mutex_unlock(&philos->all->mutex_dead);
 		philos = philos->next;
@@ -46,8 +48,10 @@ int	all_ate(t_philo *philos)
 		return (0);
 	while (aux)
 	{
+		pthread_mutex_lock(&philos->all->mutex_dead);
 		if (aux->nate >= aux->args.neats)
 			ate++;
+		pthread_mutex_unlock(&philos->all->mutex_dead);
 		aux = aux->next;
 	}
 	if (ate == philos->args.philos)
@@ -55,27 +59,28 @@ int	all_ate(t_philo *philos)
 	return (0);
 }
 
-int	auxstartroutine(t_philo *philos, t_philo *aux)
+static void	help_me(t_philo *philos, t_philo *aux)
 {
-	ft_usleep(philos, 1);
-	if (death_checker(aux) == 1)
-		return (1);
-	if (all_ate(philos) == 1)
+	while (1)
 	{
-		print_mutex(philos, "all ate\t\t"EMOALLATE, RED);
-		return (1);
+		ft_usleep(philos, 1);
+		if (death_checker(aux) == 1)
+			break ;
+		if (all_ate(philos) == 1)
+		{
+			print_mutex(philos, "all ate\t\t"EMOALLATE, RED);
+			pthread_mutex_lock(&philos->all->mutex_dead);
+			philos->all->state = philos->filoid;
+			pthread_mutex_unlock(&philos->all->mutex_dead);
+			break ;
+		}
 	}
-	return (0);
 }
 
 void	ft_startroutine(t_philo *philos)
 {
-	int		i;
-	int		flag;
 	t_philo	*aux;
 
-	i = 0;
-	flag = 0;
 	aux = philos;
 	while (aux)
 	{
@@ -83,13 +88,11 @@ void	ft_startroutine(t_philo *philos)
 		aux = aux->next;
 	}
 	aux = philos;
-	while (flag != 0)
-		flag = auxstartroutine(philos, aux);
+	help_me(philos, aux);
 	aux = philos;
 	while (aux)
 	{
-		pthread_join(&aux->thread[i], NULL);
-		i++;
+		pthread_join(aux->thread, NULL);
 		aux = aux->next;
 	}
 }

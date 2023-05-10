@@ -6,7 +6,7 @@
 /*   By: magonzal <magonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:16:22 by magonzal          #+#    #+#             */
-/*   Updated: 2023/05/10 18:35:34 by magonzal         ###   ########.fr       */
+/*   Updated: 2023/05/10 20:32:46 by magonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ unsigned long	timestamp(void)
 int	check_dead(t_philo *philos)
 {
 	pthread_mutex_lock(&philos->all->mutex_dead);
-	if (philos->state != -1)
+	if (philos->all->state != -1)
 	{
 		pthread_mutex_unlock(&philos->all->mutex_dead);
 		return (1);
