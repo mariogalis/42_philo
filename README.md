@@ -41,9 +41,11 @@ $ make
 ```shell
 $ ./philo <num_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> <times_to_eat>
 ```
-Replace <num_philosophers> with the number of philosophers at the table.
-Replace <time_to_die>, <time_to_eat>, and <time_to_sleep> with the respective time intervals in milliseconds.
-Replace <times_to_eat> with the number of times each philosopher must eat before the program ends.
+- Replace <num_philosophers> with the number of philosophers at the table.
+
+- Replace <time_to_die>, <time_to_eat>, and <time_to_sleep> with the respective time intervals in milliseconds.
+
+- Replace <times_to_eat> with the number of times each philosopher must eat before the program ends.
 
 For example, to simulate 5 philosophers with the following time intervals:
 
