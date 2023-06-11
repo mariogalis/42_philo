@@ -12,7 +12,7 @@ To address data races and ensure correct synchronization, various synchronizatio
 
 The Dining Philosophers Problem is a classic synchronization problem that illustrates the challenges of concurrent programming. It involves a group of philosophers sitting at a table with a bowl of rice and chopsticks (forks) placed between each pair of philosophers. The philosophers alternate between thinking and eating. However, to eat, a philosopher needs to acquire both the left and right chopsticks. The problem arises when all philosophers simultaneously pick up their left chopstick, leaving them unable to acquire the right one, resulting in a deadlock.
 
-To solve this problem, we can introduce a mutex for each chopstick and impose some rules to prevent deadlocks. One common solution is to use a semaphore or mutex to represent each chopstick and allow philosophers to acquire both chopsticks only if they are available. By ensuring that each philosopher picks up the chopsticks in a consistent order, we can avoid deadlocks.
+To solve this problem, we can introduce a mutex for each fork and impose some rules to prevent deadlocks. One common solution is to use a semaphore or mutex to represent each chopstick and allow philosophers to acquire both chopsticks only if they are available. By ensuring that each philosopher picks up the chopsticks in a consistent order, we can avoid deadlocks.
 
 ## Program Usage
 To compile and execute the program, follow these steps:
