@@ -61,9 +61,7 @@ Observe the output to see the philosophers' actions and the program's behavior.
 
 Press Ctrl+C to stop the program.
 
-<img width="449" alt="Screenshot 2023-06-11 at 13 55 20" src="https://github.com/mariogalis/42_philo/assets/44349256/634a31c8-f17b-4281-b67a-ecca9d839d3d">
-
-
+<img width="455" alt="Screenshot 2023-06-13 at 00 37 25" src="https://github.com/mariogalis/42_philo/assets/44349256/7852dc6a-bef3-4a4c-94ff-f05706139a6a">
 
 ## License
 This project is written by me so feel free to use it as a guide of your own proyect!!
