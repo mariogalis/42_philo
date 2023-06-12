@@ -1,7 +1,7 @@
 # Dining Philosophers 42_philo
 This repository contains a C program that solves the Dining Philosophers Problem using mutexes. The program simulates a scenario where a number of philosophers sit around a table and try to eat using forks. The goal is to prevent deadlocks and ensure that each philosopher can eat without causing conflicts with others.
 <p align="center">
-<img src="https://github.com/mariogalis/42_philo/assets/44349256/5819089b-8e67-46a1-bd31-57b4d92f8828" width="400" height="250">
+<img src="https://cdn.battlefy.com/blog/5f5978933ed49802100b173d26a8eee0c0c60d68cacac0e26598f47b108ad9da.jpeg" width="400" height="250">
 </p>
 
 ## Introduction
